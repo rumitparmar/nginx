@@ -1,4 +1,11 @@
-FROM nginx:mainline-alpine
-RUN rm /etc/nginx/conf.d/*
-ADD helloworld.conf /etc/nginx/conf.d/
-ADD index.html /usr/share/nginx/html/
+# Use the official Nginx image as base
+FROM nginx:latest
+
+# Copy custom development configuration file
+COPY nginx-dev.conf /etc/nginx/nginx.conf
+
+# Expose ports
+EXPOSE 8080
+
+# Command to start Nginx
+CMD ["nginx", "-g", "daemon off;"]
